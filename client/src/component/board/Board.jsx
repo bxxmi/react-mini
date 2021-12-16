@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import BoardItem from "./BoardItem";
+import { Link } from "react-router-dom";
 
 const Board = () => {
   const [boardList, setBoardList] = useState([]);
@@ -19,6 +20,9 @@ const Board = () => {
   return (
     <div>
       <h2>게시판</h2>
+      <Link to="/createBoard">
+        <button>글 작성</button>
+      </Link>
       <ul>
         {boardList.map((item) => {
           return <BoardItem key={item.id} item={item} />;
