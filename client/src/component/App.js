@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "../css/toy.css";
 
 import Board from "../component/board/Board";
-import Login from "../component/login/Login.jsx";
+import Login from "../component/login/Login";
 import Register from "../component/register/Register";
 import Product from "../component/product/Product";
 import Cart from "../component/cart/Cart";
