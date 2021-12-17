@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 const Board = () => {
   const [boardList, setBoardList] = useState([]);
   const [listCount, setListCount] = useState(0);
+  const [boardPerPage, setBoardPerPage] = useState([]);
 
   // 게시판 목록 조회
   useEffect(() => {
@@ -41,6 +42,20 @@ const Board = () => {
       }
     });
   };
+
+  useEffect(() => {
+    // 초기 페이지
+    const start = 1;
+    axios
+      .post("/api/Board?type=page", {
+        start: (Number(start) - 1) * 10,
+        length: 10,
+      })
+      .then((response) => {
+        console.log(response.data.json);
+        setBoardPerPage(response.data.json);
+      });
+  }, []);
 
   return (
     <div>
