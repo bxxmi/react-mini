@@ -31,6 +31,17 @@ const Board = () => {
     });
   }, [setListCount]);
 
+  // 게시판 조회수
+  const onClick = (id) => {
+    axios.post("/api/Board?type=upCount", { id }).then((response) => {
+      try {
+        console.log(response);
+      } catch (e) {
+        console.error("Error Encure: ", e);
+      }
+    });
+  };
+
   return (
     <div>
       <h2>게시판</h2>
@@ -40,7 +51,7 @@ const Board = () => {
       <h5>총 {listCount}개의 게시글</h5>
       <ul>
         {boardList.map((item) => {
-          return <BoardItem key={item.id} item={item} />;
+          return <BoardItem key={item.id} item={item} onClick={onClick} />;
         })}
       </ul>
     </div>
