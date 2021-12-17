@@ -10,26 +10,21 @@ const CreateBoard = () => {
   const userRef = useRef();
   const passwordRef = useRef();
 
-  const createBoard = (board) => {
-    console.log(board);
-    axios.post("/api/Board?type=save", { board }).then((response) => {
-      console.log(response);
-    });
-  };
-
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const board = {
-      title: titleRef.current.value,
-      content: contentRef.current.value,
-      id: Date.now(),
-      insert_user: userRef.current.value,
-      view_count: 0,
-      write_password: passwordRef.current.value,
-    };
-
-    createBoard(board);
+    axios
+      .post("/api/Board?type=save", {
+        id: null,
+        title: titleRef.current.value,
+        content: contentRef.current.value,
+        insert_user: userRef.current.value,
+        view_count: 0,
+        write_password: passwordRef.current.value,
+      })
+      .then((response) => {
+        console.log(response);
+      });
   };
 
   return (
