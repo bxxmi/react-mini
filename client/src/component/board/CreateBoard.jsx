@@ -1,9 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import axios from "axios";
 
 const CreateBoard = () => {
-  const [boardItem, setBoardItem] = useState({});
-
   const formRef = useRef();
   const titleRef = useRef();
   const contentRef = useRef();
@@ -23,7 +21,11 @@ const CreateBoard = () => {
         write_password: passwordRef.current.value,
       })
       .then((response) => {
-        console.log(response);
+        try {
+          console.log(response);
+        } catch (e) {
+          console.error("Error Encure: ", e);
+        }
       });
   };
 
