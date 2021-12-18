@@ -27,12 +27,33 @@ const Register = () => {
       .then((response) => {
         const result = response.data.json[0].dupliEmailCount;
         if (result > 0) alert("이미 존재하는 이메일입니다.");
+        else alert("사용 가능한 이메일입니다.");
       });
   };
 
   // 회원가입
   const onSubmit = (e) => {
     e.preventDefault();
+
+    axios
+      .post("/api/user?type=signup", {
+        user_name: nameRef.current.value,
+        user_email1: emailRef_1.current.value,
+        user_email2: emailRef_2.current.value,
+        user_org: jobRef.current.value,
+        user_password: passwordRef.current.value,
+        user_major: majorRef.current.value,
+        user_phone: phoneRef.current.value,
+        user_confirm: "Y",
+        reg_user: emailRef_1.current.value + "@" + emailRef_2.current.value,
+        reg_date: null,
+        update_user: null,
+        update_date: null,
+        update_password_date: null,
+      })
+      .then((response) => {
+        console.log(response);
+      });
   };
 
   return (
