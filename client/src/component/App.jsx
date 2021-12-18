@@ -6,7 +6,7 @@ import "../css/toy.css";
 
 import Board from "./board/Board";
 import Login from "./login/Login";
-import Register from "./register/Register";
+import Register from "./register/Register.jsx";
 import Product from "./product/Product";
 import Cart from "./cart/Cart";
 import History from "./history/History";
