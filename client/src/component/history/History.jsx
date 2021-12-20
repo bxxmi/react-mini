@@ -22,16 +22,17 @@ const History = () => {
   }, [setPayHistory]);
 
   const showDetailPay = (id) => {
-    axios
-      .post("/api/order?type=orderDetail", {
-        user_id: USER_ID,
-        order_id: id,
-      })
-      .then((response) => {
-        const result = response.data.json;
-        console.log(result);
-        setDetailHistory(result);
-      });
+    console.log(id);
+    // axios
+    //   .post("/api/order?type=orderDetail", {
+    //     user_id: USER_ID,
+    //     order_id: id,
+    //   })
+    //   .then((response) => {
+    //     const result = response.data.json;
+    //     console.log(result);
+    //     setDetailHistory(result);
+    //   });
   };
 
   return (

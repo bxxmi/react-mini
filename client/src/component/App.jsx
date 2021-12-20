@@ -16,7 +16,7 @@ import BoardDetail from "./board/BoardDetail";
 import CreateBoard from "./board/CreateBoard";
 
 function App() {
-  const [userId, setUserId] = useState("bomi@bomi.com");
+  const [userId, setUserId] = useState("onetest@onetest.com");
 
   return (
     <div className="App">
