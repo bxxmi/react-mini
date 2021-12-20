@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import PayInfo from "./PayInfo";
 
 const USER_ID = "onetest@onetest.com";
-const CART_ID = "";
+const CART_ID = "20211220CART000096";
 
 const Cart = () => {
   const [cartList, setCartList] = useState([]);

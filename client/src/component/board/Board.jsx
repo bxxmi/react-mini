@@ -43,19 +43,19 @@ const Board = () => {
     });
   };
 
-  useEffect(() => {
-    // 초기 페이지
-    const start = 1;
-    axios
-      .post("/api/Board?type=page", {
-        start: (Number(start) - 1) * 10,
-        length: 10,
-      })
-      .then((response) => {
-        console.log(response.data.json);
-        setBoardPerPage(response.data.json);
-      });
-  }, []);
+  // useEffect(() => {
+  //   // 초기 페이지
+  //   const start = 1;
+  //   axios
+  //     .post("/api/Board?type=page", {
+  //       start: (Number(start) - 1) * 10,
+  //       length: 10,
+  //     })
+  //     .then((response) => {
+  //       console.log(response.data.json);
+  //       setBoardPerPage(response.data.json);
+  //     });
+  // }, [setBoardPerPage]);
 
   return (
     <div>
