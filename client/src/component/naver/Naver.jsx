@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import NaverProduct from "./NaverProduct";
 
 const Naver = () => {
   const [keyword, setKeyword] = useState("");
@@ -61,16 +62,12 @@ const Naver = () => {
             })}
         </ul>
       </div>
-      <div>
+      <ul>
         {product &&
           Object.values(product).map((items) => {
-            return (
-              <p>
-                {items.title} {items.lprice} <button>등록</button>
-              </p>
-            );
+            return <NaverProduct items={items} />;
           })}
-      </div>
+      </ul>
     </>
   );
 };
