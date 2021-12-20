@@ -21,16 +21,16 @@ const History = ({ userId }) => {
 
   const showDetailPay = (id) => {
     console.log(id);
-    // axios
-    //   .post("/api/order?type=orderDetail", {
-    //     user_id: USER_ID,
-    //     order_id: id,
-    //   })
-    //   .then((response) => {
-    //     const result = response.data.json;
-    //     console.log(result);
-    //     setDetailHistory(result);
-    //   });
+    axios
+      .post("/api/order?type=orderDetail", {
+        user_id: userId,
+        order_id: id,
+      })
+      .then((response) => {
+        const result = response.data.json;
+        console.log(result);
+        setDetailHistory(result);
+      });
   };
 
   return (

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import EditProduct from "./EditProduct";
 
 const ProductList = ({ item, user_id }) => {
+  console.log(user_id);
   const [isOpen, setIsOpen] = useState(false);
   const [cartId, setCartId] = useState("");
 
