@@ -1,9 +1,29 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import EditProduct from "./EditProduct";
 
-const ProductList = ({ item }) => {
+const ProductList = ({ item, user_id }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [cartId, setCartId] = useState("");
+
+  const addCart = () => {
+    // 카트 아이디부터 조회
+    axios.post("/api/cart?type=cart_id", { user_id }).then((response) => {
+      const result = response.data.json[0].cart_id;
+      setCartId(result);
+    });
+
+    // 조회 후 바로 장바구니 담기
+    axios
+      .post("/api/cart?type=save", {
+        user_id,
+        product_id: item.product_id,
+        cart_id: cartId,
+      })
+      .then((response) => {
+        alert("장바구니에 담겼습니다.");
+      });
+  };
 
   const openEditForm = () => {
     setIsOpen(!isOpen);
@@ -61,7 +81,7 @@ const ProductList = ({ item }) => {
     <>
       <li>
         {item.title}
-        <button>담기</button>
+        <button onClick={addCart}>담기</button>
         <button onClick={openEditForm}>변경</button>
       </li>
       <div>

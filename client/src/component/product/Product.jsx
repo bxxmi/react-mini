@@ -186,7 +186,13 @@ const Product = () => {
       <ul>
         {productList &&
           productList.map((item) => {
-            return <ProductList key={item.product_id} item={item} />;
+            return (
+              <ProductList
+                key={item.product_id}
+                item={item}
+                user_id={USER_ID}
+              />
+            );
           })}
       </ul>
     </>
