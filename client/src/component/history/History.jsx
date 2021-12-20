@@ -2,16 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import HistoryList from "./HistoryList";
 
-const USER_ID = "onetest@onetest.com";
-
-const History = () => {
+const History = ({ userId }) => {
   const [payHistory, setPayHistory] = useState([]);
   const [detailHistory, setDetailHistory] = useState([]);
 
   useEffect(() => {
     axios
       .post("/api/order?type=list", {
-        user_id: USER_ID,
+        user_id: userId,
         start_date: "",
         end_date: "",
       })

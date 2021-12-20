@@ -2,9 +2,7 @@ import axios from "axios";
 import ProductList from "./ProductList";
 import React, { useEffect, useState } from "react";
 
-const USER_ID = "onetest@onetest.com";
-
-const Product = () => {
+const Product = ({ userId }) => {
   const [category1, setCategory1] = useState([]);
   const [category2, setCategory2] = useState([]);
   const [category3, setCategory3] = useState([]);
@@ -17,7 +15,7 @@ const Product = () => {
 
   useEffect(() => {
     axios
-      .post("/api/product?type=list", { user_id: USER_ID })
+      .post("/api/product?type=list", { user_id: userId })
       .then((response) => {
         const result = response.data.json;
         setProductList(result);
@@ -42,7 +40,7 @@ const Product = () => {
     setSelected1(category1);
 
     axios
-      .post("/api/product?type=list", { user_id: USER_ID, category1 })
+      .post("/api/product?type=list", { user_id: userId, category1 })
       .then((response) => {
         const result = response.data.json;
         setProductList(result);
@@ -62,7 +60,7 @@ const Product = () => {
 
     axios
       .post("/api/product?type=list", {
-        user_id: USER_ID,
+        user_id: userId,
         category1,
         category2,
       })
@@ -91,7 +89,7 @@ const Product = () => {
 
     axios
       .post("/api/product?type=list", {
-        user_id: USER_ID,
+        user_id: userId,
         category1,
         category2,
         category3,
@@ -122,7 +120,7 @@ const Product = () => {
 
     axios
       .post("/api/product?type=list", {
-        user_id: USER_ID,
+        user_id: userId,
         category1,
         category2,
         category3,
@@ -187,11 +185,7 @@ const Product = () => {
         {productList &&
           productList.map((item) => {
             return (
-              <ProductList
-                key={item.product_id}
-                item={item}
-                user_id={USER_ID}
-              />
+              <ProductList key={item.product_id} item={item} user_id={userId} />
             );
           })}
       </ul>

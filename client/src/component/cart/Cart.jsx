@@ -2,16 +2,15 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import PayInfo from "./PayInfo";
 
-const USER_ID = "onetest@onetest.com";
 const CART_ID = "20211220CART000096";
 
-const Cart = () => {
+const Cart = ({ userId }) => {
   const [cartList, setCartList] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
 
   // 장바구니 리스트
   useEffect(() => {
-    axios.post("/api/cart?type=list", { user_id: USER_ID }).then((response) => {
+    axios.post("/api/cart?type=list", { user_id: userId }).then((response) => {
       const result = response.data.json;
       setCartList(result);
     });
@@ -21,7 +20,7 @@ const Cart = () => {
   useEffect(() => {
     axios
       .post("/api/cart?type=totalPrice", {
-        user_id: USER_ID,
+        user_id: userId,
         cart_id: CART_ID,
       })
       .then((response) => {
@@ -68,7 +67,7 @@ const Cart = () => {
         card_month,
         card_year,
         cart_id: CART_ID,
-        user_id: USER_ID,
+        user_id: userId,
         complete_yn: "Y",
         total_price: totalPrice,
       })
@@ -82,7 +81,7 @@ const Cart = () => {
         cart_id: CART_ID,
         complete_yn: "Y",
         product_id: "",
-        user_id: USER_ID,
+        user_id: userId,
       })
       .then((response) => {
         console.log(response);
