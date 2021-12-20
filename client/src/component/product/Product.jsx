@@ -1,4 +1,5 @@
 import axios from "axios";
+import ProductList from "./ProductList";
 import React, { useEffect, useState } from "react";
 
 const USER_ID = "onetest@onetest.com";
@@ -185,7 +186,7 @@ const Product = () => {
       <ul>
         {productList &&
           productList.map((item) => {
-            return <li key={item.product_id}>{item.title}</li>;
+            return <ProductList key={item.product_id} item={item} />;
           })}
       </ul>
     </>

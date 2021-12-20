@@ -7,7 +7,7 @@ import "../css/toy.css";
 import Board from "./board/Board";
 import Login from "./login/Login";
 import Register from "./register/Register.jsx";
-import Product from "./product/Product";
+import Product from "./product/Product.jsx";
 import Cart from "./cart/Cart";
 import History from "./history/History";
 import Naver from "./naver/Naver.jsx";
