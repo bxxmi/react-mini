@@ -10,7 +10,7 @@ import Register from "./register/Register.jsx";
 import Product from "./product/Product";
 import Cart from "./cart/Cart";
 import History from "./history/History";
-import Naver from "./naver/Naver";
+import Naver from "./naver/Naver.jsx";
 import { useState } from "react";
 import BoardDetail from "./board/BoardDetail";
 import CreateBoard from "./board/CreateBoard";
