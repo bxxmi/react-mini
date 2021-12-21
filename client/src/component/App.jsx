@@ -2,6 +2,7 @@ import { Route } from "react-router-dom";
 import Header from "../route/Header";
 import Footer from "../route/Footer";
 import "bootstrap/dist/css/bootstrap.css";
+import "../css/toy.css";
 
 import Board from "./board/Board";
 import Login from "./login/Login";
