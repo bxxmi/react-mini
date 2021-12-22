@@ -1,5 +1,7 @@
 import React, { useRef } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { Button, Container, Form, FormGroup, Input, Label } from "reactstrap";
 
 const CreateBoard = () => {
   const formRef = useRef();
@@ -8,8 +10,24 @@ const CreateBoard = () => {
   const userRef = useRef();
   const passwordRef = useRef();
 
+  const history = useHistory();
+
   const onSubmit = (e) => {
     e.preventDefault();
+
+    if (!titleRef.current.value) {
+      alert("제목을 입력해주세요");
+      titleRef.current.focus();
+    } else if (!userRef.current.value) {
+      alert("작성자를 입력해주세요");
+      userRef.current.focus();
+    } else if (!contentRef.current.value) {
+      alert("내용을 입력해주세요");
+      contentRef.current.focus();
+    } else if (!passwordRef.current.value) {
+      alert("비밀번호를 입력해주세요");
+      passwordRef.current.focus();
+    }
 
     axios
       .post("/api/Board?type=save", {
@@ -22,7 +40,8 @@ const CreateBoard = () => {
       })
       .then((response) => {
         try {
-          console.log(response);
+          alert("게시글이 성공적으로 작성됐습니다.");
+          history.goBack();
         } catch (e) {
           console.error("Error Encure: ", e);
         }
@@ -30,15 +49,34 @@ const CreateBoard = () => {
   };
 
   return (
-    <form ref={formRef}>
-      <input ref={titleRef} type="text" name="title" placeholder="제목" />
-      <input ref={contentRef} type="text" name="content" placeholder="내용" />
-      <input ref={passwordRef} type="password" placeholder="작성 비밀번호" />
-      <input ref={userRef} type="text" placeholder="등록자" />
-      <button type="submit" onClick={onSubmit}>
-        생성
-      </button>
-    </form>
+    <Container>
+      <Form innerRef={formRef}>
+        <FormGroup>
+          <Label>제목</Label>
+          <Input innerRef={titleRef} type="text" name="title" maxLength="50" />
+        </FormGroup>
+        <FormGroup>
+          <Label>작성자</Label>
+          <Input innerRef={userRef} type="text" name="writer" />
+        </FormGroup>
+        <FormGroup>
+          <Label>내용</Label>
+          <Input innerRef={contentRef} type="textarea" name="content" />
+        </FormGroup>
+        <FormGroup>
+          <Label>게시글 비밀번호</Label>
+          <Input
+            innerRef={passwordRef}
+            type="password"
+            placeholder="작성 비밀번호"
+            maxLength="10"
+          />
+        </FormGroup>
+        <Button type="submit" onClick={onSubmit}>
+          생성
+        </Button>
+      </Form>
+    </Container>
   );
 };
 
