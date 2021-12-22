@@ -1,9 +1,17 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import axios from "axios";
+import {
+  Button,
+  Container,
+  Form,
+  FormGroup,
+  Input,
+  Label,
+  Col,
+  Row,
+} from "reactstrap";
 
 const Register = () => {
-  const [newUser, setNewUser] = useState({});
-
   const formRef = useRef();
   const emailRef_1 = useRef();
   const emailRef_2 = useRef();
@@ -57,39 +65,55 @@ const Register = () => {
   };
 
   return (
-    <div>
+    <Container>
       <h2>회원가입</h2>
-      <form ref={formRef}>
-        <input ref={nameRef} type="text" name="name" placeholder="등록자" />
-        <input
-          ref={emailRef_1}
-          type="text"
-          name="email1"
-          placeholder="이메일1"
-        />
-        <input
-          ref={emailRef_2}
-          type="text"
-          name="email2"
-          placeholder="이메일2"
-        />
-        <button type="submit" onClick={dupleCheck}>
-          중복 검사
-        </button>
-        <input
-          ref={passwordRef}
-          type="password"
-          name="password"
-          placeholder="비밀번호"
-        />
-        <input ref={phoneRef} type="text" name="phone" placeholder="전화번호" />
-        <input ref={majorRef} type="text" name="major" placeholder="전공" />
-        <input ref={jobRef} type="text" name="job" placeholder="직업" />
-        <button type="submit" onClick={onSubmit}>
+      <Form innerRef={formRef}>
+        <FormGroup>
+          <Label>이름</Label>
+          <Input innerRef={nameRef} type="text" name="name" />
+        </FormGroup>
+        <Col md={4}>
+          <FormGroup>
+            <Label>이메일</Label>
+            <Input
+              innerRef={emailRef_1}
+              type="text"
+              name="email1"
+              placeholder="이메일1"
+            />
+            @
+            <Input
+              innerRef={emailRef_2}
+              type="text"
+              name="email2"
+              placeholder="이메일2"
+            />
+          </FormGroup>
+        </Col>
+        <Button type="submit" onClick={dupleCheck}>
+          이메일 중복 검사
+        </Button>
+        <FormGroup>
+          <Label>비밀번호</Label>
+          <Input innerRef={passwordRef} type="password" name="password" />
+        </FormGroup>
+        <FormGroup>
+          <Label>전화번호</Label>
+          <Input innerRef={phoneRef} type="text" name="phone" />
+        </FormGroup>
+        <FormGroup>
+          <Label>전공</Label>
+          <Input innerRef={majorRef} type="text" name="major" />
+        </FormGroup>
+        <FormGroup>
+          <Label>직업</Label>
+          <Input innerRef={jobRef} type="text" name="job" />
+        </FormGroup>
+        <Button type="submit" onClick={onSubmit}>
           가입
-        </button>
-      </form>
-    </div>
+        </Button>
+      </Form>
+    </Container>
   );
 };
 
