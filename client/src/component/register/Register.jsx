@@ -8,10 +8,12 @@ import {
   Input,
   Label,
   Col,
-  Row,
 } from "reactstrap";
+import { useHistory } from "react-router";
 
 const Register = () => {
+  const history = useHistory();
+
   const formRef = useRef();
   const emailRef_1 = useRef();
   const emailRef_2 = useRef();
@@ -27,6 +29,7 @@ const Register = () => {
 
     const email1 = emailRef_1.current.value;
     const email2 = emailRef_2.current.value;
+
     axios
       .post("/api/user?type=dplicheck", {
         user_email1: email1,
@@ -42,6 +45,23 @@ const Register = () => {
   // 회원가입
   const onSubmit = (e) => {
     e.preventDefault();
+
+    if (!nameRef.current.value) {
+      alert("이름을 입력해주세요");
+      nameRef.current.focus();
+    } else if (!emailRef_1.current.value) {
+      alert("이메일 주소를 확인해주세요");
+      emailRef_1.current.focus();
+    } else if (!emailRef_2.current.value) {
+      alert("이메일 주소를 확인해주세요");
+      emailRef_2.current.focus();
+    } else if (!passwordRef.current.value) {
+      alert("비밀번호를 입력해주세요");
+      passwordRef.current.focus();
+    } else if (!phoneRef.current.value) {
+      alert("전화번호를 입력해주세요");
+      phoneRef.current.focus();
+    }
 
     axios
       .post("/api/user?type=signup", {
@@ -60,7 +80,8 @@ const Register = () => {
         update_password_date: null,
       })
       .then((response) => {
-        console.log(response);
+        alert("회원가입이 완료되었습니다.");
+        history.push("/");
       });
   };
 
@@ -69,17 +90,18 @@ const Register = () => {
       <h2>회원가입</h2>
       <Form innerRef={formRef}>
         <FormGroup>
-          <Label>이름</Label>
-          <Input innerRef={nameRef} type="text" name="name" />
+          <Label>이름 *</Label>
+          <Input innerRef={nameRef} type="text" name="name" maxLength="20" />
         </FormGroup>
         <Col md={4}>
           <FormGroup>
-            <Label>이메일</Label>
+            <Label>이메일 *</Label>
             <Input
               innerRef={emailRef_1}
               type="text"
               name="email1"
               placeholder="이메일1"
+              maxLength="30"
             />
             @
             <Input
@@ -94,20 +116,25 @@ const Register = () => {
           이메일 중복 검사
         </Button>
         <FormGroup>
-          <Label>비밀번호</Label>
-          <Input innerRef={passwordRef} type="password" name="password" />
+          <Label>비밀번호 *</Label>
+          <Input
+            innerRef={passwordRef}
+            type="password"
+            name="password"
+            maxLength="100"
+          />
         </FormGroup>
         <FormGroup>
-          <Label>전화번호</Label>
-          <Input innerRef={phoneRef} type="text" name="phone" />
+          <Label>전화번호 *</Label>
+          <Input innerRef={phoneRef} type="text" name="phone" maxLength="100" />
         </FormGroup>
         <FormGroup>
           <Label>전공</Label>
-          <Input innerRef={majorRef} type="text" name="major" />
+          <Input innerRef={majorRef} type="text" name="major" maxLength="100" />
         </FormGroup>
         <FormGroup>
           <Label>직업</Label>
-          <Input innerRef={jobRef} type="text" name="job" />
+          <Input innerRef={jobRef} type="text" name="job" maxLength="20" />
         </FormGroup>
         <Button type="submit" onClick={onSubmit}>
           가입
