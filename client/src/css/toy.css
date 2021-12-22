@@ -10,6 +10,7 @@ img,
 fieldset,
 button {
   border: none;
+  background-color: transparent;
 }
 hr,
 button img {

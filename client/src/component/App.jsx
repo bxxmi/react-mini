@@ -2,6 +2,7 @@ import { Route } from "react-router-dom";
 import Header from "../route/Header";
 import Footer from "../route/Footer";
 import "bootstrap/dist/css/bootstrap.css";
+import Container from "@mui/material/Container";
 import "../css/toy.css";
 
 import Board from "./board/Board";
@@ -21,16 +22,18 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Route exact path="/" component={Login} />
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/register" component={Register} />
-      <Route exact path="/naverApi" component={Naver} />
-      <Route exact path="/createBoard" component={CreateBoard} />
-      <Route exact path="/board" component={Board} />
-      <Route exact path="/board/:id" component={BoardDetail} />
-      <Route path="/product" render={() => <Product userId={userId} />} />
-      <Route path="/cart" render={() => <Cart userId={userId} />} />
-      <Route path="/history" render={() => <History userId={userId} />} />
+      <Container maxWidth="lg">
+        <Route exact path="/" component={Login} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/register" component={Register} />
+        <Route exact path="/naverApi" component={Naver} />
+        <Route exact path="/createBoard" component={CreateBoard} />
+        <Route exact path="/board" component={Board} />
+        <Route exact path="/board/:id" component={BoardDetail} />
+        <Route path="/product" render={() => <Product userId={userId} />} />
+        <Route path="/cart" render={() => <Cart userId={userId} />} />
+        <Route path="/history" render={() => <History userId={userId} />} />
+      </Container>
       <Footer />
     </div>
   );
