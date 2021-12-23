@@ -1,11 +1,14 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 import NaverProduct from "./NaverProduct";
+import { Input, Label, ListGroup, ListGroupItem } from "reactstrap";
 
 const Naver = () => {
   const [keyword, setKeyword] = useState("");
   const [keywordResult, setKeywordResult] = useState([]);
   const [product, setProduct] = useState({});
+
+  const inputRef = useRef();
 
   const inputKeyword = (e) => {
     const text = e.target.value;
@@ -22,10 +25,6 @@ const Naver = () => {
       });
   };
 
-  useEffect(() => {
-    keywordHandler(keyword);
-  }, [keyword]);
-
   const onSearch = () => {
     axios
       .post("/api/naverApi?type=shopList", { query: keyword })
@@ -39,35 +38,44 @@ const Naver = () => {
 
   const changeText = (e) => {
     const text = e.target.innerText.replace("0", "");
+    inputRef.current.value = text;
     setKeyword(text);
   };
 
   return (
     <>
       <div>
-        <h2>최저가 상품 조회 및 등록 하기</h2>
-        <input
+        <Label>
+          <h5>최저가 상품 검색 및 등록</h5>
+        </Label>
+        <Input
+          innerRef={inputRef}
           type="text"
           name="search"
-          placeholder="search product"
           onChange={inputKeyword}
+          placeholder="키워드를 입력하세요"
           onKeyPress={(e) => {
             if (e.key === "Enter") onSearch();
           }}
         />
-        <ul>
+        <ListGroup>
           {keywordResult &&
-            keywordResult.map((result) => {
-              return <li onClick={changeText}>{result}</li>;
+            keywordResult.map((result, index) => {
+              const pureString = result.slice(0, 1);
+              return (
+                <ListGroupItem key={index} onClick={changeText}>
+                  {pureString}
+                </ListGroupItem>
+              );
             })}
-        </ul>
+        </ListGroup>
       </div>
-      <ul>
+      <ListGroup>
         {product &&
           Object.values(product).map((items) => {
             return <NaverProduct items={items} />;
           })}
-      </ul>
+      </ListGroup>
     </>
   );
 };
