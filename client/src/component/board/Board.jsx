@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import BoardItem from "./BoardItem";
@@ -6,11 +6,21 @@ import Button from "../button/Button";
 import styled from "styled-components";
 
 const Board = () => {
+  // 출력할 게시판 갯수
+  const listCount = 10;
+  // 게시판 리스트
   const [boardList, setBoardList] = useState([]);
-  const [listCount, setListCount] = useState(0);
-  const [boardPerPage, setBoardPerPage] = useState([]);
+  // 게시판 리스트 총 갯수
+  const [allListCount, setAllListCount] = useState(0);
+  // 현재 게시판 페이지 번호
+  const [pageNum, setPageNum] = useState(0);
 
-  // 게시판 목록 조회
+  // 페이지 개수 계산하기
+  const pageCnt = useMemo(() => {
+    return Math.ceil(allListCount / listCount);
+  }, [allListCount]);
+
+  // 게시판 리스트 조회
   useEffect(() => {
     axios.post("/api/Board?type=list").then((response) => {
       try {
@@ -27,12 +37,12 @@ const Board = () => {
     axios.post("/api/Board?type=count").then((response) => {
       try {
         const result = response.data.json[0].total_count;
-        setListCount(result);
+        setAllListCount(result);
       } catch (e) {
         console.error("Error Encure: ", e);
       }
     });
-  }, [setListCount]);
+  }, [setAllListCount]);
 
   // 게시판 조회수
   const onClick = (id) => {
@@ -44,20 +54,6 @@ const Board = () => {
       }
     });
   };
-
-  // useEffect(() => {
-  //   // 초기 페이지
-  //   const start = 1;
-  //   axios
-  //     .post("/api/Board?type=page", {
-  //       start: (Number(start) - 1) * 10,
-  //       length: 10,
-  //     })
-  //     .then((response) => {
-  //       console.log(response.data.json);
-  //       setBoardPerPage(response.data.json);
-  //     });
-  // }, [setBoardPerPage]);
 
   return (
     <BoardTemplate>
@@ -77,6 +73,8 @@ const Board = () => {
           return <BoardItem key={item.id} item={item} onClick={onClick} />;
         })}
       </BoardList>
+      {/* 페이징할 때는 계산된 페이지 개수와, 현재 페이지 번호, 페이지 번호를 갱신시키는 set함수가 필요하다. */}
+      {/* <Paging pageCnt={pageCnt} pageNum={pageNum} setPageNum={setPageNum} /> */}
     </BoardTemplate>
   );
 };
