@@ -16,6 +16,7 @@ import { useState } from "react";
 import BoardDetail from "./board/BoardDetail";
 import CreateBoard from "./board/CreateBoard";
 import HistoryDetail from "./history/HistoryDetail";
+import UserInfoList from "./register/UserInfoList";
 
 function App() {
   const [userId, setUserId] = useState("onetest@onetest.com");
@@ -27,6 +28,7 @@ function App() {
         <Route exact path="/" component={Login} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
+        <Route exact path="/userInfo" component={UserInfoList} />
         <Route exact path="/naverApi" component={Naver} />
         <Route exact path="/createBoard" component={CreateBoard} />
         <Route exact path="/board" component={Board} />

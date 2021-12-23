@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import axios from "axios";
+import { Form, FormGroup, Input, Button, Label } from "reactstrap";
 
 const UserInfo = ({ info }) => {
   const {
@@ -45,41 +46,69 @@ const UserInfo = ({ info }) => {
         user_phone: phoneRef.current.value,
       })
       .then((response) => {
-        console.log(response);
+        alert("수정이 완료되었습니다.");
       });
   };
 
   return (
-    <form>
-      <input
-        ref={emailRef}
-        type="text"
-        name="email"
-        defaultValue={user_email}
-      />
-      <input ref={nameRef} type="text" name="name" defaultValue={user_name} />
-      <input
-        ref={passwordRef}
-        type="password"
-        name="password"
-        defaultValue={user_password}
-      />
-      <button onClick={editPassword}>비밀번호 변경</button>
-      <input
-        ref={phoneRef}
-        type="text"
-        name="user_phone"
-        defaultValue={user_phone}
-      />
-      <input
-        ref={majorRef}
-        type="text"
-        name="major"
-        defaultValue={user_major}
-      />
-      <input ref={jobRef} type="text" name="job" defaultValue={user_org} />
-      <button onClick={onSubmit}>수정</button>
-    </form>
+    <Form>
+      <FormGroup>
+        <Label>이메일</Label>
+        <Input
+          innerRef={emailRef}
+          type="text"
+          name="email"
+          defaultValue={user_email}
+        />
+      </FormGroup>
+      <FormGroup>
+        <Label>유저명</Label>
+        <Input
+          innerRef={nameRef}
+          type="text"
+          name="name"
+          defaultValue={user_name}
+        />
+      </FormGroup>
+      <FormGroup>
+        <Label>비밀번호</Label>
+        <Input
+          innerRef={passwordRef}
+          type="password"
+          name="password"
+          defaultValue={user_password}
+        />
+        <Button onClick={editPassword}>비밀번호 변경</Button>
+      </FormGroup>
+      <FormGroup>
+        <Label>핸드폰 번호</Label>
+        <Input
+          innerRef={phoneRef}
+          type="text"
+          name="user_phone"
+          defaultValue={user_phone}
+        />
+      </FormGroup>
+      <FormGroup>
+        <Label>전공</Label>
+        <Input
+          innerRef={majorRef}
+          type="text"
+          name="major"
+          defaultValue={user_major}
+        />
+      </FormGroup>
+      <FormGroup>
+        <Label>직업</Label>
+        <Input
+          innerRef={jobRef}
+          type="text"
+          name="job"
+          defaultValue={user_org}
+        />
+      </FormGroup>
+      <Button onClick={onSubmit}>수정</Button>
+    </Form>
   );
 };
 
