@@ -1,8 +1,8 @@
 import axios from "axios";
 import React from "react";
+import { ListGroupItem, Button } from "reactstrap";
 
 const NaverProduct = ({ items }) => {
-  console.log(items);
   const {
     brand,
     category1,
@@ -45,10 +45,11 @@ const NaverProduct = ({ items }) => {
   };
 
   return (
-    <li>
+    <ListGroupItem>
+      <img src={image} alt="product" />
       {title}
-      <button onClick={addProduct}>등록</button>
-    </li>
+      <Button onClick={addProduct}>등록</Button>
+    </ListGroupItem>
   );
 };
 
