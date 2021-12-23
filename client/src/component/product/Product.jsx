@@ -1,6 +1,7 @@
 import axios from "axios";
 import ProductList from "./ProductList";
 import React, { useEffect, useState } from "react";
+import { ListGroup } from "reactstrap";
 
 const Product = ({ userId }) => {
   const [category1, setCategory1] = useState([]);
@@ -181,14 +182,14 @@ const Product = ({ userId }) => {
             })}
         </select>
       </div>
-      <ul>
+      <ListGroup>
         {productList &&
           productList.map((item) => {
             return (
               <ProductList key={item.product_id} item={item} user_id={userId} />
             );
           })}
-      </ul>
+      </ListGroup>
     </>
   );
 };

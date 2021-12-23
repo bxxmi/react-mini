@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useState } from "react";
 import EditProduct from "./EditProduct";
+import { ListGroupItem, Button } from "reactstrap";
 
 const ProductList = ({ item, user_id }) => {
-  console.log(user_id);
   const [isOpen, setIsOpen] = useState(false);
   const [cartId, setCartId] = useState("");
 
@@ -47,6 +47,7 @@ const ProductList = ({ item, user_id }) => {
       title,
       product_id,
     } = info;
+
     axios
       .post("/api/product?type=modify", {
         brand,
@@ -80,11 +81,14 @@ const ProductList = ({ item, user_id }) => {
 
   return (
     <>
-      <li>
+      <ListGroupItem>
+        <img src={item.image} alt="product" />
         {item.title}
-        <button onClick={addCart}>담기</button>
-        <button onClick={openEditForm}>변경</button>
-      </li>
+        <Button onClick={addCart} style={{ marginRight: 10 + "px" }}>
+          담기
+        </Button>
+        <Button onClick={openEditForm}>변경</Button>
+      </ListGroupItem>
       <div>
         {isOpen && (
           <EditProduct

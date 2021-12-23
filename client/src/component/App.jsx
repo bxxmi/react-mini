@@ -15,6 +15,7 @@ import Naver from "./naver/Naver.jsx";
 import { useState } from "react";
 import BoardDetail from "./board/BoardDetail";
 import CreateBoard from "./board/CreateBoard";
+import HistoryDetail from "./history/HistoryDetail";
 
 function App() {
   const [userId, setUserId] = useState("onetest@onetest.com");
@@ -33,6 +34,7 @@ function App() {
         <Route path="/product" render={() => <Product userId={userId} />} />
         <Route path="/cart" render={() => <Cart userId={userId} />} />
         <Route path="/history" render={() => <History userId={userId} />} />
+        <Route path="/historyDetail/:id" component={HistoryDetail} />
       </Container>
       <Footer />
     </div>

@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { ListGroup, ListGroupItem } from "reactstrap";
 import PayInfo from "./PayInfo";
 
 const CART_ID = "20211220CART000096";
@@ -8,7 +9,7 @@ const Cart = ({ userId }) => {
   const [cartList, setCartList] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
 
-  // 장바구니 리스트
+  // 장바구니 리스트 조회
   useEffect(() => {
     axios.post("/api/cart?type=list", { user_id: userId }).then((response) => {
       const result = response.data.json;
@@ -16,7 +17,7 @@ const Cart = ({ userId }) => {
     });
   }, [setCartList]);
 
-  // 장바구니 합계
+  // 장바구니 합계 계산
   useEffect(() => {
     axios
       .post("/api/cart?type=totalPrice", {
@@ -29,7 +30,10 @@ const Cart = ({ userId }) => {
       });
   }, [setTotalPrice]);
 
+  // 결제 진행
   const payProduct = (info) => {
+    console.log(info);
+
     const {
       receive_user,
       receive_user_tel1,
@@ -84,20 +88,25 @@ const Cart = ({ userId }) => {
         user_id: userId,
       })
       .then((response) => {
-        console.log(response);
+        alert("결제 되었습니다.");
       });
   };
 
   return (
     <div>
       <h2>장바구니</h2>
-      <ul>
+      <ListGroup style={{ marginBottom: 30 + "px" }}>
         {cartList &&
           cartList.map((item) => {
-            return <li key={item.product_id}>{item.title}</li>;
+            return (
+              <ListGroupItem key={item.product_id}>
+                <img src={item.image} alt="product" />
+                {item.title}
+              </ListGroupItem>
+            );
           })}
-      </ul>
-      <div>
+      </ListGroup>
+      <div style={({ marginBottom: 30 + "px" }, { textAlign: "center" })}>
         <h2>총 합계 {totalPrice}원</h2>
       </div>
       <PayInfo onPay={payProduct} />

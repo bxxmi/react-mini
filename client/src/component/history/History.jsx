@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import HistoryList from "./HistoryList";
+import { ListGroup } from "reactstrap";
 
 const History = ({ userId }) => {
   const [payHistory, setPayHistory] = useState([]);
@@ -19,35 +20,27 @@ const History = ({ userId }) => {
       });
   }, [setPayHistory]);
 
-  const showDetailPay = (id) => {
-    console.log(id);
-    axios
-      .post("/api/order?type=orderDetail", {
-        user_id: userId,
-        order_id: id,
-      })
-      .then((response) => {
-        const result = response.data.json;
-        console.log(result);
-        setDetailHistory(result);
-      });
-  };
+  // const showDetailPay = (id) => {
+  //   axios
+  //     .post("/api/order?type=orderDetail", {
+  //       user_id: userId,
+  //       order_id: id,
+  //     })
+  //     .then((response) => {
+  //       const result = response.data.json;
+  //       setDetailHistory(result);
+  //     });
+  // };
 
   return (
     <div>
       <h2>사용자 구매내역</h2>
-      <ul>
+      <ListGroup>
         {payHistory &&
           payHistory.map((history) => {
-            return (
-              <HistoryList
-                key={history.order_id}
-                history={history}
-                onShowDetail={showDetailPay}
-              />
-            );
+            return <HistoryList key={history.order_id} history={history} />;
           })}
-      </ul>
+      </ListGroup>
     </div>
   );
 };
